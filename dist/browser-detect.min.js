@@ -1,6 +1,6 @@
 /*!
- * browser-detect - 1.0.0
- * [object Object]
+ * @gct256/browser-detect - 1.0.1
+ * https://github.com/gct256/browser-detect#readme
  * License: MIT
  * ----
  * based on current-device - 0.7.8
