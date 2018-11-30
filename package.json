@@ -1,5 +1,5 @@
 {
-  "name": "browser-detect",
+  "name": "@gct256/browser-detect",
   "description": "browser detection libray, based on current-device.",
   "version": "1.0.0",
   "main": "index",
