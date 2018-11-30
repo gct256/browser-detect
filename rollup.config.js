@@ -8,7 +8,7 @@ const currentDevice = require('./node_modules/current-device/package.json')
 
 const banner = `/*!
  * ${pkg.name} - ${pkg.version}
- * ${pkg.repository}
+ * ${pkg.homepage}
  * License: MIT
  * ----
  * based on ${currentDevice.name} - ${currentDevice.version}
