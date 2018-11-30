@@ -9,7 +9,7 @@
   "scripts": {
     "pretest": "rollup -c",
     "test": "jest",
-    "prepublish": "rollup -c"
+    "prepublishOnly": "rollup -c"
   },
   "repository": {
     "type": "git",
