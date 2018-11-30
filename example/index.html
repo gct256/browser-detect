@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>browser-detect</title>
+  </head>
+  <body>
+    <script src="../dist/browser-detect.min.js"></script>
+    <script>
+      var tmp = document.createElement('pre');
+      tmp.appendChild(
+        document.createTextNode(
+          document.documentElement.className.replace(/\s+/g, '\n'),
+        ),
+      );
+      document.body.appendChild(tmp);
+    </script>
+  </body>
+</html>
