@@ -1,5 +1,5 @@
 /*!
- * @gct256/browser-detect - 1.0.1
+ * @gct256/browser-detect - 1.0.2
  * https://github.com/gct256/browser-detect#readme
  * License: MIT
  * ----
