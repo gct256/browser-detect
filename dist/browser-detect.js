@@ -3,7 +3,7 @@
  * https://github.com/gct256/browser-detect#readme
  * License: MIT
  * ----
- * based on current-device - 0.7.8
+ * based on current-device - 0.8.1
  * https://github.com/matthewhudson/current-device
  */
 
@@ -39,20 +39,24 @@ var browserDetect = (function () {
     return obj;
   }
 
-  function _objectSpread(target) {
+  function _objectSpread2(target) {
     for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-      var ownKeys = Object.keys(source);
+      if (i % 2) {
+        var source = arguments[i] != null ? arguments[i] : {};
+        var ownKeys = Object.keys(source);
 
-      if (typeof Object.getOwnPropertySymbols === 'function') {
-        ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-        }));
+        if (typeof Object.getOwnPropertySymbols === 'function') {
+          ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+            return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+          }));
+        }
+
+        ownKeys.forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(arguments[i]));
       }
-
-      ownKeys.forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
     }
 
     return target;
@@ -76,7 +80,7 @@ var browserDetect = (function () {
 
   var userAgent = window.navigator.userAgent.toLowerCase(); // Detectable television devices.
 
-  var television = ['googletv', 'viera', 'smarttv', 'internet.tv', 'netcast', 'nettv', 'appletv', 'boxee', 'kylo', 'roku', 'dlnadoc', 'roku', 'pov_tv', 'hbbtv', 'ce-html']; // Main functions
+  var television = ['googletv', 'viera', 'smarttv', 'internet.tv', 'netcast', 'nettv', 'appletv', 'boxee', 'kylo', 'roku', 'dlnadoc', 'pov_tv', 'hbbtv', 'ce-html']; // Main functions
   // --------------
 
   device.macos = function () {
@@ -187,7 +191,7 @@ var browserDetect = (function () {
 
   device.portrait = function () {
     if (screen.orientation && Object.prototype.hasOwnProperty.call(window, 'onorientationchange')) {
-      return screen.orientation.type.includes('portrait');
+      return includes(screen.orientation.type, 'portrait');
     }
 
     return window.innerHeight / window.innerWidth > 1;
@@ -195,7 +199,7 @@ var browserDetect = (function () {
 
   device.landscape = function () {
     if (screen.orientation && Object.prototype.hasOwnProperty.call(window, 'onorientationchange')) {
-      return screen.orientation.type.includes('landscape');
+      return includes(screen.orientation.type, 'landscape');
     }
 
     return window.innerHeight / window.innerWidth < 1;
@@ -210,11 +214,16 @@ var browserDetect = (function () {
     return this;
   }; // Private Utility Functions
   // -------------------------
-  // Simple UA string search
+  // Check if element exists
+
+
+  function includes(haystack, needle) {
+    return haystack.indexOf(needle) !== -1;
+  } // Simple UA string search
 
 
   function find(needle) {
-    return userAgent.indexOf(needle) !== -1;
+    return includes(userAgent, needle);
   } // Check if documentElement already has a given class.
 
 
@@ -352,7 +361,7 @@ var browserDetect = (function () {
   }
 
   device.type = findMatch(['mobile', 'tablet', 'desktop']);
-  device.os = findMatch(['ios', 'iphone', 'ipad', 'ipod', 'android', 'blackberry', 'windows', 'fxos', 'meego', 'television']);
+  device.os = findMatch(['ios', 'iphone', 'ipad', 'ipod', 'android', 'blackberry', 'macos', 'windows', 'fxos', 'meego', 'television']);
 
   function setOrientationCache() {
     device.orientation = findMatch(['portrait', 'landscape']);
@@ -390,7 +399,7 @@ var browserDetect = (function () {
   }
 
   document.documentElement.className = classes.join(' ');
-  var browserDetect = _objectSpread({}, device, {
+  var browserDetect = _objectSpread2({}, device, {
     blink: function blink() {
       return classes.indexOf('blink') >= 0;
     },
